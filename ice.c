@@ -1373,6 +1373,7 @@ static void janus_ice_webrtc_free(janus_ice_handle *handle) {
 	}
 	handle->agent_created = 0;
 	if(handle->stream != NULL) {
+		JANUS_LOG(LOG_ERR, "[%"SCNu64"] TMATTH setting handle to null; %p %p\n", handle->handle_id, handle, handle->session);
 		janus_ice_stream_destroy(handle->stream);
 		handle->stream = NULL;
 	}
