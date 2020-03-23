@@ -2642,7 +2642,7 @@ static void janus_ice_cb_nice_recv(NiceAgent *agent, guint stream_id, guint comp
 								np->handle = handle;
 								np->seq_number = cur_seq->seq;
 								np->vindex = vindex;
-								GSource *timeout_source = g_timeout_source_new_seconds(5);
+								GSource *timeout_source = g_timeout_source_new_seconds(61);
 								g_source_set_callback(timeout_source, janus_ice_nacked_packet_cleanup, np, (GDestroyNotify)g_free);
 								g_source_attach(timeout_source, handle->mainctx);
 								g_source_unref(timeout_source);
