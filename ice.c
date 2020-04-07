@@ -3958,11 +3958,13 @@ static gboolean janus_ice_outgoing_traffic_handle(janus_ice_handle *handle, janu
 		/* There are remote candidates pending, add them now */
 		GSList *candidates = NULL;
 		NiceCandidate *c = NULL;
+		JANUS_LOG(LOG_WARN, "[%"SCNu64"] Processing candidates\n", handle->handle_id);
 		while((c = g_async_queue_try_pop(handle->queued_candidates)) != NULL) {
 			JANUS_LOG(LOG_VERB, "[%"SCNu64"] Processing candidate %p\n", handle->handle_id, c);
 			candidates = g_slist_append(candidates, c);
 		}
 		guint count = g_slist_length(candidates);
+		JANUS_LOG(LOG_WARN, "[%"SCNu64"] Processed %u candidates\n", count);
 		if(stream != NULL && component != NULL && count > 0) {
 			int added = nice_agent_set_remote_candidates(handle->agent, stream->stream_id, component->component_id, candidates);
 			if(added < 0 || (guint)added != count) {
