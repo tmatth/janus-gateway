@@ -1762,7 +1762,9 @@ trickledone:
 		/* We reply right away, not to block the web server... */
 		json_t *reply = janus_create_message("ack", session_id, transaction_text);
 		/* Send the success reply */
+		JANUS_LOG(LOG_WARN, "SEND trickle ACK for %s\n", transaction_text);
 		ret = janus_process_success(request, reply);
+		JANUS_LOG(LOG_WARN, "SENT trickle ACK for %s\n", transaction_text);
 	} else {
 		ret = janus_process_error(request, session_id, transaction_text, JANUS_ERROR_UNKNOWN_REQUEST, "Unknown request '%s'", message_text);
 	}
